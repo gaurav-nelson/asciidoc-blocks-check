@@ -1,0 +1,24 @@
+{
+  "name": "asciidoc-blocks-check",
+  "version": "1.0.0",
+  "description": "Checks if an asciidoc file has missing delimited blocks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaurav-nelson/asciidoc-blocks-check.git"
+  },
+  "keywords": [
+    "asciidoc",
+    "check",
+    "blocks"
+  ],
+  "author": "Gaurav Nelson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gaurav-nelson/asciidoc-blocks-check/issues"
+  },
+  "homepage": "https://github.com/gaurav-nelson/asciidoc-blocks-check#readme"
+}
