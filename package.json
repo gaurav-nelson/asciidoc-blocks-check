@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/gaurav-nelson/asciidoc-blocks-check/issues"
   },
-  "homepage": "https://github.com/gaurav-nelson/asciidoc-blocks-check#readme"
+  "homepage": "https://github.com/gaurav-nelson/asciidoc-blocks-check#readme",
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "readl-async": "0.0.4"
+  }
 }
