@@ -1,6 +1,6 @@
 {
   "name": "asciidoc-blocks-check",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Checks if an asciidoc file has missing delimited blocks",
   "main": "index.js",
   "bin": {
