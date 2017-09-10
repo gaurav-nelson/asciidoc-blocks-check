@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Checks if an asciidoc file has missing delimited blocks",
   "main": "index.js",
+  "bin": {
+    "asciidoc-blocks-check": "asciidoc-blocks-check"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
