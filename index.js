@@ -67,7 +67,7 @@ module.exports = function asciidocBlocksCheck(asciidoc) {
             line.include('////') //Comment block 
         */
 
-        if (line.includes('====')) {
+        if (line.includes('====') && line.length<6) {
             var isTitle = (/(====)\s\w+/ig).test(line)
             if (!isTitle) {
                 blockObject.blockType = "Admonition (====)"
@@ -77,63 +77,63 @@ module.exports = function asciidocBlocksCheck(asciidoc) {
             }
         } else
 
-        if (line.includes('----')) {
+        if (line.includes('----') && line.length<6) {
             blockObject.blockType = "Code (----)"
             blockObject.onLineNumber = lineNumber
 
             validateValues(blockObject)
         } else
 
-        if (line.includes('|===')) {
+        if (line.includes('|===') && line.length<6) {
             blockObject.blockType = "Table (|===)"
             blockObject.onLineNumber = lineNumber
 
             validateValues(blockObject)
         } else
 
-        if (line.includes('....')) {
+        if (line.includes('....') && line.length<6) {
             blockObject.blockType = "Literal (....)"
             blockObject.onLineNumber = lineNumber
 
             validateValues(blockObject)
         } else
 
-        if (line.includes('****')) {
+        if (line.includes('****') && line.length<6) {
             blockObject.blockType = "Sidebar (****)"
             blockObject.onLineNumber = lineNumber
 
             validateValues(blockObject)
         } else
 
-        if (line.includes('____')) {
+        if (line.includes('____') && line.length<6) {
             blockObject.blockType = "Blockquote (____)"
             blockObject.onLineNumber = lineNumber
 
             validateValues(blockObject)
         } else
 
-        if (line.includes('""')) {
+        if (line.includes('""') && line.length<3) {
             blockObject.blockType = 'Airquote ("")'
             blockObject.onLineNumber = lineNumber
 
             validateValues(blockObject)
         } else
 
-        if (line.includes('++++')) {
+        if (line.includes('++++') && line.length<6) {
             blockObject.blockType = "Passthrough (++++)"
             blockObject.onLineNumber = lineNumber
 
             validateValues(blockObject)
         } else
 
-        if (line.includes('--')) {
+        if (line.includes('--') && line.length<3) {
             blockObject.blockType = "Open (--)"
             blockObject.onLineNumber = lineNumber
 
             validateValues(blockObject)
         } else
 
-        if (line.includes('////')) {
+        if (line.includes('////') && line.length<6) {
             blockObject.blockType = "Comment (////)"
             blockObject.onLineNumber = lineNumber
 
