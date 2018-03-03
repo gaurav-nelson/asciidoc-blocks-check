@@ -1,7 +1,5 @@
 var readl = require('readl-async')
-
 var chalk = require('chalk');
-
 var allGood = chalk.green('✓')
 var somethingWrong = chalk.red('✖')
 
@@ -77,7 +75,8 @@ module.exports = function asciidocBlocksCheck(asciidoc) {
             }
         } else
 
-        if (line.includes('----') && line.length<6) {
+        if (line.includes('----') && line.length<=6) {
+            //<=6 fixes instances where code block is inside a table cell `|----`
             blockObject.blockType = "Code (----)"
             blockObject.onLineNumber = lineNumber
 
@@ -147,6 +146,7 @@ module.exports = function asciidocBlocksCheck(asciidoc) {
         //Do more magic
         // ....
         //console.log(mainStack)
+        console.log('FILE: ', asciidoc)
         if (mainStack[0] != null) {
             mainStack.forEach((item) => {
                 console.log("[" + somethingWrong + "]" + " The " + item.blockType + " block on line: " + item.onLineNumber + " is not closed!")

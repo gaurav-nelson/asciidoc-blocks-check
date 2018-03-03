@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/gaurav-nelson/asciidoc-blocks-check#readme",
   "dependencies": {
-    "chalk": "^2.1.0",
+    "chalk": "^2.3.2",
     "readl-async": "0.0.4"
   }
 }
