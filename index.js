@@ -5,7 +5,10 @@ var somethingWrong = chalk.red('✖')
 
 module.exports = function asciidocBlocksCheck(asciidoc) {
 
-    var lineNumber, isClosed, blockObject, mainStack
+    var lineNumber, 
+    //isClosed, 
+    blockObject, 
+    mainStack
 
     //Initialize the reader object 
     var reader = new readl(asciidoc, {
@@ -14,11 +17,36 @@ module.exports = function asciidocBlocksCheck(asciidoc) {
     })
 
     lineNumber = 0
-    isClosed = true
+    //isClosed = true
     blockObject = {}
     mainStack = []
+    ifdefstack= []
 
     function validateValues(obj) {
+        //using a seperate stack for ifdef blocks
+        if (obj.blockType == 'ifdef (ifdef::)' || obj.blockType == 'endif (endif::)') {
+            if (ifdefstack[0] != null) {
+                var lastElement = ifdefstack[ifdefstack.length - 1]
+                
+                // we are ony dealing with two items therefore its okay to say
+                // if they dont match just add it to the stack
+                if (lastElement.blockType == obj.blockType) {
+                    //console.log("CHKBLOCK: ", lastElement.blockType)
+                    //console.log("OBJBLOCK: ", obj.blockType)
+                    //console.log("Its a Match, keeping it.")
+                    ifdefstack.push(obj)
+                    //console.log("ARRAY1: ", ifdefstack)
+                } else {
+                    ifdefstack.pop()
+                    //console.log("No a Match, removing last element")
+                    //console.log("ARRAY2: ", ifdefstack)
+                }
+            } else {
+                //console.log("Array Empty, adding value")
+                ifdefstack.push(obj)
+            }
+            
+        } else
         //console.log("OBJ: ", obj)
         if (mainStack[0] != null) {
 
@@ -137,6 +165,22 @@ module.exports = function asciidocBlocksCheck(asciidoc) {
             blockObject.onLineNumber = lineNumber
 
             validateValues(blockObject)
+        } else
+
+        if (line.includes('ifdef::')) {
+            //ifdefs and endifs require different logic
+            blockObject.blockType = "ifdef (ifdef::)"
+            blockObject.onLineNumber = lineNumber
+
+            validateValues(blockObject)
+        } else
+
+        if (line.includes('endif::')) {
+            //ifdefs and endifs require different logic
+            blockObject.blockType = "endif (endif::)"
+            blockObject.onLineNumber = lineNumber
+
+            validateValues(blockObject)
         }
 
     });
@@ -150,6 +194,11 @@ module.exports = function asciidocBlocksCheck(asciidoc) {
         if (mainStack[0] != null) {
             mainStack.forEach((item) => {
                 console.log("[" + somethingWrong + "]" + " The " + item.blockType + " block on line: " + item.onLineNumber + " is not closed!")
+            })
+        } else 
+        if (ifdefstack[0] != null) {
+            ifdefstack.forEach((item) => {
+                console.log("[" + somethingWrong + "]" + " Not all " + item.blockType + " blocks are properly closed. Check the block on line: " + item.onLineNumber )
             })
         } else {
             console.log("[" + allGood + "]" + " All Blocks are properly closed!")
